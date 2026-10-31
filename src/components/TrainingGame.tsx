@@ -3,6 +3,7 @@ import { ChevronLeft, RotateCcw } from 'lucide-react'
 import { missions, type ModuleId } from '../data/content'
 import { useProgress } from '../context/ProgressContext'
 import { playSound } from '../hooks/useSpeech'
+import { SpeakButton } from './common/SpeakButton'
 
 interface Props {
   go: (id: ModuleId) => void
@@ -65,15 +66,15 @@ export function TrainingGame({ go, label, Back, Title, celebrate }: Props) {
     <Title emoji="🤖" title={label('אַלֵּף אֶת הָרוֹבּוֹט')} sub={label('מְלַמְּדִים אֶת רוֹבִּי מֵדֻגְמָאוֹת')} speak={() => {}} />
     <div className="stepper"><b className={phase === 'train' ? 'active' : ''}>1. אימון הרובוט</b><span /><b className={phase === 'test' ? 'active' : ''}>2. זמן בדיקה!</b></div>
     {phase === 'train' ? <>
-      <div className="mission-picker">{missions.map((item, index) => <button key={item.title} className={missionIndex === index ? 'selected' : ''} onClick={() => { setMissionIndex(index); reset() }}>משימה {index + 1}<strong>{label(item.title)}</strong></button>)}</div>
+      <div className="mission-picker">{missions.map((item, index) => <button key={item.title} className={missionIndex === index ? 'selected' : ''} onClick={() => { setMissionIndex(index); reset() }}>משימה {index + 1}<strong>{label(item.title)}</strong><SpeakButton text={item.title}/></button>)}</div>
       <div className="game-card train-card">
-        <h2>עֲזֹר לְרוֹבִי לְמַיֵּן! <span className="brain-meter"><i style={{ width: `${learnedCount / mission.examples.length * 100}%` }} /></span></h2>
-        <p>{selected === null ? 'בַּחֲרוּ תְּמוּנָה לְלִמּוּד' : 'עַכְשָׁו בַּחֲרוּ אֵיזֶה דְּלִי מַתְאִים'}</p>
+        <h2>עֲזֹר לְרוֹבִי לְמַיֵּן! <SpeakButton text="עזור לרובי למיין"/><span className="brain-meter"><i style={{ width: `${learnedCount / mission.examples.length * 100}%` }} /></span></h2>
+        <p>{selected === null ? 'בַּחֲרוּ תְּמוּנָה לְלִמּוּד' : 'עַכְשָׁו בַּחֲרוּ אֵיזֶה דְּלִי מַתְאִים'} <SpeakButton text={selected === null ? 'בחרו תמונה ללימוד' : 'עכשיו בחרו איזה דלי מתאים'}/></p>
         <div className="bucket-row">
-          <div className="bucket">{mission.examples.map((emoji, index) => <button key={emoji} disabled={Boolean(learned[emoji])} className={`example ${selected === index ? 'chosen' : ''}`} onClick={() => setSelected(index)}>{emoji}</button>)}</div>
+          <div className="bucket">{mission.examples.map((emoji, index) => <button key={emoji} disabled={Boolean(learned[emoji])} className={`example ${selected === index ? 'chosen' : ''}`} onClick={() => setSelected(index)}>{emoji}<SpeakButton text={`פריט ${index + 1}`}/></button>)}</div>
           <div className="buckets">
-            <button disabled={selected === null} onClick={() => chooseBucket('left')}><span>{mission.left}</span><b>🧺</b></button>
-            <button disabled={selected === null} onClick={() => chooseBucket('right')}><span>{mission.right}</span><b>🚚</b></button>
+            <button disabled={selected === null} onClick={() => chooseBucket('left')}><span>{mission.left}</span><SpeakButton text={mission.left}/><b>🧺</b></button>
+            <button disabled={selected === null} onClick={() => chooseBucket('right')}><span>{mission.right}</span><SpeakButton text={mission.right}/><b>🚚</b></button>
           </div>
         </div>
         <div className="meter-label">🧠 מֶד הַלְמִידָה: {Math.round(learnedCount / mission.examples.length * 100)}%</div>
@@ -81,10 +82,10 @@ export function TrainingGame({ go, label, Back, Title, celebrate }: Props) {
     </> : <div className="game-card test-card">
       <div className="test-badge">⚡ מַבְחָן הַחָדָשׁ</div>
       {testIndex < mission.test.length ? <>
-        <h2>רוֹבִּי מְנַחֵשׁ לְפִי מָה שֶׁלָּמַד!</h2>
+        <h2>רוֹבִּי מְנַחֵשׁ לְפִי מָה שֶׁלָּמַד! <SpeakButton text="רובי מנחש לפי מה שלמד"/></h2>
         <div className="big-item">{mission.test[testIndex]}</div>
-        <p>רוֹבִּי חוֹשֵׁב: <strong>{predictedBucket === 'left' ? label(mission.left) : label(mission.right)}</strong></p>
-        {feedback === null ? <div className="two-actions"><button className="ai-btn" onClick={() => answerTest(predictedBucket === expectedBucket)}>✅ רוֹבִּי צָדַק!</button><button className="normal-btn" onClick={() => answerTest(predictedBucket !== expectedBucket)}>🔁 לֹא בְּדִיּוּק</button></div> : <div className={feedback ? 'feedback good' : 'feedback'}>{feedback ? 'כָּל הַכָּבוֹד! הַלְמִידָה עוֹבֶדֶת.' : 'טוֹב שֶׁבָּדַקְנוּ! כָּךְ מַחְשֵׁב לוֹמֵד.'}<button onClick={nextTest}>הַבָּא <ChevronLeft /></button></div>}
+        <p>רוֹבִּי חוֹשֵׁב: <strong>{predictedBucket === 'left' ? label(mission.left) : label(mission.right)}</strong> <SpeakButton text={predictedBucket === 'left' ? mission.left : mission.right}/></p>
+        {feedback === null ? <div className="two-actions"><button className="ai-btn" onClick={() => answerTest(predictedBucket === expectedBucket)}>✅ רוֹבִּי צָדַק! <SpeakButton text="רובי צדק"/></button><button className="normal-btn" onClick={() => answerTest(predictedBucket !== expectedBucket)}>🔁 לֹא בְּדִיּוּק <SpeakButton text="לא בדיוק"/></button></div> : <div className={feedback ? 'feedback good' : 'feedback'}>{feedback ? 'כָּל הַכָּבוֹד! הַלְמִידָה עוֹבֶדֶת.' : 'טוֹב שֶׁבָּדַקְנוּ! כָּךְ מַחְשֵׁב לוֹמֵד.'}<SpeakButton text={feedback ? 'כל הכבוד הלמידה עובדת' : 'טוב שבדקנו כך מחשב לומד'}/><button onClick={nextTest}>הַבָּא <SpeakButton text="הבא"/><ChevronLeft /></button></div>}
       </> : <div className="success">נִצַּחְתָּ! רוֹבִּי הִשְׁתַּפֵּר בְּכָל דַּעַת שֶׁלִּמַּדְתָּ! ⭐</div>}
       <button className="reset" onClick={reset}><RotateCcw /> מִשִׂימָה חֲדָשָׁה</button>
     </div>}

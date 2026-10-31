@@ -5,6 +5,7 @@ export interface TrainMission { title: string; left: string; right: string; exam
 export interface DetectorItem { name: string; emoji: string; ai: boolean; why: string }
 export interface PatternLevel { sequence: string[]; answers: string[]; correct: number }
 export interface QuizQuestion { question: string; emoji: string; answers: string[]; correct: number; hint: string }
+export interface VideoItem { title: string; description: string; videoId: string }
 
 export const portals: Portal[] = [
   { id: 'train', title: 'אַלֵּף אֶת הָרוֹבּוֹט', subtitle: 'מְלַמְּדִים מֵדֻגְמָאוֹת', emoji: '🤖', color: '#ff8552' },
@@ -22,7 +23,7 @@ export const missions: TrainMission[] = [
 ]
 
 export const detectorItems: DetectorItem[] = [
-  { name:'שׁוֹאֵב אָבָק רוֹבּוֹטִי', emoji:'🧹', ai:true, why:'הוּא לוֹמֵד אֵיפֹה לִנְסֹעַ וּמוֹצֵא לִכְלוּךְ בְּעַצְמוֹ.' },
+  { name:'שׁוֹאֵב אָבָק רוֹבּוֹטִי', emoji:'🤖', ai:true, why:'הוּא לוֹמֵד אֵיפֹה לִנְסֹעַ וּמוֹצֵא לִכְלוּךְ בְּעַצְמוֹ.' },
   { name:'מְכוֹנִית אוֹטוֹנוֹמִית', emoji:'🚘', ai:true, why:'הַמַּחְשֵׁב מִתְבּוֹנֵן בַּדֶּרֶךְ וּמַחְלִיט לְאָן לִנְסֹעַ.' },
   { name:'עוֹזֵר קוֹלִי חָכָם', emoji:'🗣️', ai:true, why:'הוּא מַקְשִׁיב לַמִּלִּים וְעוֹנֶה לִשְׁאֵלוֹת.' },
   { name:'רוֹבּוֹט מְשַׂחֵק שַׁחְמָט', emoji:'♟️', ai:true, why:'הוּא חוֹשֵׁב עַל מַהֲלָכִים וְלוֹמֵד אֵיךְ לְנַצֵּחַ.' },
@@ -58,6 +59,12 @@ export const quiz: QuizQuestion[] = [
   { question:'מָה רוֹבּוֹט צָרִיךְ כְּדֵי לִלְמֹד?', emoji:'📚', answers:['דֻּגְמָאוֹת','גֶּשֶׁם','כּוֹבַע'], correct:0, hint:'רמז: מראים לו דברים רבים.' },
   { question:'מָה עוֹשָׂה מְכוֹנִית אוֹטוֹנוֹמִית?', emoji:'🚗', answers:['נוֹהֶגֶת לְבַד','אוֹפָה עוּגָה','שָׁרָה'], correct:0, hint:'היא יכולה לנסוע ולראות את הדרך.' },
   { question:'מָה אֲנַחְנוּ צְרִיכִים לַעֲשׂוֹת עִם AI?', emoji:'🧒', answers:['לִבְדֹּק וּלְהַחְלִיט','לִישֹׁן','לָרוּץ'], correct:0, hint:'אנחנו תמיד המנהלים!' },
+]
+
+export const videos: VideoItem[] = [
+  { title: 'אֵיךְ רוֹבּוֹטִים לוֹמְדִים?', description: 'סִרְטוֹן מַדָּע קָצָר עַל רוֹבּוֹטִים וְלְמִידָה.', videoId: '4qHc9ZRBsAk' },
+  { title: 'מָה זֹאת בִּינָה מְלָאכוּתִית?', description: 'הֶסְבֵּר יְלָדִים מְאוּיָּר עַל AI.', videoId: 'ad79nYk2keg' },
+  { title: 'רוֹבּוֹטִים בְּעוֹלָם הָאֲמִתִּי', description: 'מַדְרִיךְ מַדָּעִי עַל רוֹבּוֹטִים שֶׁעוֹזְרִים לָנוּ.', videoId: 'H2t7lknrK28' },
 ]
 
 export const badges = ['מוּמְחֶה הָרוֹבּוֹטִים','בַּלַּשׁ הַדְּפוּסִים','מְאַלֵּף הַבִּינָה']
