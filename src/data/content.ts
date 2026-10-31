@@ -5,7 +5,7 @@ export interface TrainMission { title: string; left: string; right: string; exam
 export interface DetectorItem { name: string; emoji: string; ai: boolean; why: string }
 export interface PatternLevel { sequence: string[]; answers: string[]; correct: number }
 export interface QuizQuestion { question: string; emoji: string; answers: string[]; correct: number; hint: string }
-export interface VideoItem { title: string; description: string; videoId: string }
+export interface VideoItem { title: string; description: string; youtubeId: string }
 
 export const portals: Portal[] = [
   { id: 'train', title: 'אַלֵּף אֶת הָרוֹבּוֹט', subtitle: 'מְלַמְּדִים מֵדֻגְמָאוֹת', emoji: '🤖', color: '#ff8552' },
@@ -62,9 +62,10 @@ export const quiz: QuizQuestion[] = [
 ]
 
 export const videos: VideoItem[] = [
-  { title: 'אֵיךְ רוֹבּוֹטִים לוֹמְדִים?', description: 'סִרְטוֹן מַדָּע קָצָר עַל רוֹבּוֹטִים וְלְמִידָה.', videoId: '4qHc9ZRBsAk' },
-  { title: 'מָה זֹאת בִּינָה מְלָאכוּתִית?', description: 'הֶסְבֵּר יְלָדִים מְאוּיָּר עַל AI.', videoId: 'ad79nYk2keg' },
-  { title: 'רוֹבּוֹטִים בְּעוֹלָם הָאֲמִתִּי', description: 'מַדְרִיךְ מַדָּעִי עַל רוֹבּוֹטִים שֶׁעוֹזְרִים לָנוּ.', videoId: 'H2t7lknrK28' },
+  { youtubeId: 'L1HWh82yxk8', title: 'מָה זוֹ בִּינָה מְלָאכוּתִית? הֶסְבֵּר פָּשׁוּט לִילָדִים', description: 'הֶסְבֵּר מִשְׁפַּחְתִּי פָּשׁוּט וּמְאוּיָּר עַל AI.' },
+  { youtubeId: 'G8FUkn16uvI', title: 'הִילִימוּד - מָה זֶה AI לִילָדִים סַקְרָנִים?', description: 'לְמִידָה מְהַנָּה עַל בִּינָה מְלָאכוּתִית לִילָדִים.' },
+  { youtubeId: 'E78sKtFm7rg', title: 'אֵיךְ בִּינָה מְלָאכוּתִית לוֹמֶדֶת? הֶסְבֵּר קָצָר', description: 'הֶסְבֵּר קָצָר עַל הַדֶּרֶךְ שֶׁבָּהּ AI לוֹמֶדֶת.' },
+  { youtubeId: 'eXH1YoxA_CI', title: 'רוֹבּוֹטִים חֲכָמִים בְּעִבְרִית עִם בְּלִיפִּי', description: 'מַסָּע מְשַׂמֵּחַ לָעוֹלָם שֶׁל הָרוֹבּוֹטִים בְּעִבְרִית.' },
 ]
 
 export const badges = ['מוּמְחֶה הָרוֹבּוֹטִים','בַּלַּשׁ הַדְּפוּסִים','מְאַלֵּף הַבִּינָה']
